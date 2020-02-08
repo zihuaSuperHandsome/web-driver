@@ -1,0 +1,11 @@
+CREATE TABLE `<%print(tableName);%>` (
+  <%
+    var len = fields.~size;
+    var i = 1;
+    for(field in fields){
+        print("`" + field.name + "` " + field.type + "(" + field.length + ") " + field.other);
+        println(",");
+    }
+  %>
+ PRIMARY KEY (`<%print(primaryKey);%>`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 <%print(tableComment);;
