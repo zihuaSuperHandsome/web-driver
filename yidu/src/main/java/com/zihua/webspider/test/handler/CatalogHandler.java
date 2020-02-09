@@ -65,7 +65,7 @@ public class CatalogHandler extends AbstractChannelHandler {
             PAGE_COUNT.getAndAdd(list.size());
         }
     }
-
+    
     public String nextTarget(Page page) {
         return null;
     }

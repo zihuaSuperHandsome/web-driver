@@ -9,14 +9,14 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+    <name>webdriver-core</name>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <groupId>com.zihua</groupId>
+        <version>1.0.0</version>
+        <artifactId>web-driver</artifactId>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-    <name>webdriver-core</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,15 +26,24 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot-->
+        <!-- springframework-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.2.3.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.3.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <version>2.2.4.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--MyBatis-Plus-->
@@ -56,7 +65,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.2</version>
-<!--            <scope>provided</scope>-->
         </dependency>
 
 
@@ -111,6 +119,14 @@
                 <configuration>
                     <skipTests>true</skipTests>
                     <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

@@ -51,7 +51,6 @@ public class ListHandler extends AbstractChannelHandler {
                 .build());
         }
         if (bookService.saveBatch(books)) {
-//            log.info("{}添加完成.", page.getUrl().get());
             PAGE_COUNT.getAndAdd(books.size());
             List<String> urls = html.$(".b_row .b_read").links().all();
             page.addTargetRequests(urls);

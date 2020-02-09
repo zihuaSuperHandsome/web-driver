@@ -2,6 +2,7 @@ package com.zihua.webspider.test.handler;
 
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HtmlUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.zihua.webspider.handler.AbstractChannelHandler;
 import com.zihua.webspider.test.entity.BookCatalog;
@@ -53,13 +54,6 @@ public class ContentHandler extends AbstractChannelHandler {
                 new UpdateWrapper<BookCatalog>().eq("title", title).eq("content_title", content_title).eq("author", author).eq("origin_id", origin_id))) {
             PAGE_COUNT.getAndIncrement();
         }
-    }
-
-    public static void main(String[] args) {
-        String content = "《色女外传――那些我们的青春》第8节";
-        String reg = "(?<=》).*";
-        String a = ReUtil.get(reg, content, 0);
-        System.out.println(a);
     }
 
     public String nextTarget(Page page) {

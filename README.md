@@ -31,14 +31,15 @@ lombok
 - 2020年2月6日02:48:54 自定义表注释
 - 2020年2月7日20:02:52 如果length指定为0，则生成后的数据类型会是TEXT。
 
-待完成：
+## 待完成(不分先后)：
 
-1. 完善Prop类
-2. 如何处理Handler之间的通信问题？
-3. 使用外部配置文件，并且尽量简化到只用application.yml或application.properties。
-3. 在表生成工具中，关于java字段类型和数据库类型的转换，希望可以更加灵活。 
+1. 完善Prop类。
+2. 如何处理Handler之间的通信问题？(redis、设计模式？)
+3. 如何使用外部配置文件？并且是否可以尽量简化到只用application.yml或application.properties不需要用户额外配置config.properties。
+4. 在表生成工具中，关于java字段类型和数据库类型的转换，希望可以更加灵活。 
+5. 实现登陆抓取
+6. 代码生成工具(自动生成Mapper、IService、ServiceImpl、Handler)
 ```
-
 
 ## 2020年2月8日19:03:39
 
@@ -50,7 +51,9 @@ lombok
 
 导入IDEA，运行spider-test模块下的Application，爬虫便会自动抓取某个小说网的内容，爬取如下：
 
+![image.png](https://iblog-zihua.oss-cn-beijing.aliyuncs.com/image_1581163719827.png?x-oss-process=style/iBlog)
 
+小说网占地面积略大一点，目测整个站2W本小说，25GB左右。
 
 # 自动生成说明
 
@@ -65,6 +68,7 @@ tableUtils.tableCreateByClass(VideoBean.class);
 1. 必须要使用@TableName指定表名字段，表明可选，如不指定表明则默认为Bean的UnderScore格式。
 2. 必须要使用@TableId指定主键Id字段，字段名可选，如不指定则默认为字段名的UnderScore格式，目前仅支持整形（int,long...)。
 3. 所有的字段类型必须使用包装类型而不能使用基本数据类型和其他引用类型，例如：int，bit，User，Bean。
+
 
 # 使用lombok实现链式调用
 

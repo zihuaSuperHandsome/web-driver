@@ -16,6 +16,8 @@
 
     <modules>
         <module>webdriver-core</module>
-        <module>spider-test</module>
+        <module>yidu</module>
+        <module>zhihu</module>
+        <module>zhaopin</module>
     </modules>
 </project>

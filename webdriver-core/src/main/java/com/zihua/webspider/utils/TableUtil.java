@@ -26,6 +26,7 @@ import com.zihua.webspider.annotation.FieldName;
 import com.zihua.webspider.database.FieldVo;
 import com.zihua.webspider.enums.JdbcTypeEnum;
 import com.zihua.webspider.enums.OtherEnum;
+import com.zihua.webspider.exception.NoConfigException;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
@@ -133,7 +134,12 @@ public class TableUtil {
     }
 
     public static void tableGenerateByPackage() throws SQLException, IOException {
-        config = new Prop("config.properties");
+        try {
+            config = new Prop("config.properties");    
+        } catch (Exception e) {
+            log.error("没有正确的读取到配置项.");
+            throw new NoConfigException("配置项package-scan找不到.");
+        }
         String path = config.getProperty("package-scan");
         if (StrUtil.isBlank(path)) {
             throw new RuntimeException("没有找到 package-scan 的路径.");
