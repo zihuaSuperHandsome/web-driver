@@ -8,6 +8,8 @@ import com.zihua.webspider.processor.Grasp;
 import com.zihua.webspider.utils.TableUtil;
 import com.zihua.zhaopin.handler.IndexHandler;
 import com.zihua.zhaopin.handler.PageHandler;
+import com.zihua.zhaopin.handler.SchoolHandler;
+import com.zihua.zhaopin.handler.TagsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -31,16 +33,35 @@ public class SpiderRunner implements CommandLineRunner {
     private IndexHandler indexHandle;
 
     @Resource
-    private PageHandler pageHandler;
+    private SchoolHandler schoolHandler;
     
+    @Resource
+    private PageHandler pageHandler;
+
+    @Resource
+    private TagsHandler tagsHandler;
+
     public void run(String... args) throws Exception {
         TableUtil.tableGenerateByPackage();
 
+        String url1 = "https://www.lagou.com/";
+        String url2 = "https://xiaoyuan.lagou.com/";
+        String url3 = "https://www.lagou.com/zhaopin/Java/30";
+        String url4 = "https://www.lagou.com/jobs/6569978.html";
+
         DateTime start = DateUtil.date();
-        String url = "https://www.lagou.com/";
-//        String url = "https://www.lagou.com/zhaopin/Java/3/";
         Site site = Site.me().setRetryTimes(10).setTimeOut(10000).setSleepTime(800).setCycleRetryTimes(3);
-        Grasp.create().addListen(indexHandle).addListen(pageHandler).Site(site).addUrl(url).run();
+        Grasp.create()
+                .addListen(indexHandle)
+                .addListen(schoolHandler)
+                .addListen(tagsHandler)
+                .addListen(pageHandler)
+                .Site(site)
+//                .addUrl(url1)
+//                .addUrl(url2)
+//                .addUrl(url3)
+                .addUrl(url4)
+                .run();
         DateTime end = DateUtil.date();
 
         log.info("/***************************/");

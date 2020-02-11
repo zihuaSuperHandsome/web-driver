@@ -10,26 +10,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @ClassName JobTag
+ * @Description TODO
+ * @Author 刘子华
+ * @Date 2020/2/10 2:30
+ */
 @Data
 @Builder
-@TableName("job_lagou_tags")
+@TableName("industry")
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobTag {
+public class Industry {
 
     @TableId(type = IdType.AUTO)
     @FieldName(other = OtherEnum.PRIMARY_KEY, length = 10)
     private Integer id;
 
-    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "标签名")
+    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "行业名")
     private String name;
 
-    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 300, comment = "标签地址")
-    private String url;
-    
-    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "父标签名")
-    private String p_name;
-
-    @FieldName(length = 300, comment = "源地址标识")
+    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "源id")
     private String origin_id;
 }

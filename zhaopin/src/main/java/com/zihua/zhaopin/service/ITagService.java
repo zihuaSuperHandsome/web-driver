@@ -1,7 +1,7 @@
 package com.zihua.zhaopin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zihua.zhaopin.entity.JobTag;
+import com.zihua.zhaopin.entity.Tag;
 
-public interface IJobTagService extends IService<JobTag> {
+public interface ITagService extends IService<Tag> {
 }

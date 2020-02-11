@@ -14,33 +14,41 @@ import us.codecraft.webmagic.selector.Selectable;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @ClassName SchoolHandler
+ * @Description TODO
+ * @Author 刘子华
+ * @Date 2020/2/10 1:31
+ */
 @Component
-public class IndexHandler extends AbstractChannelHandler {
-    
+public class SchoolHandler extends AbstractChannelHandler {
+
     @Resource
     ITagService jobTagService;
     
     @Override
     public boolean condition(Page page) {
-        String reg = "https://.*lagou.com/*";
+        String reg = "https://xiaoyuan.lagou.com/*";
         return ReUtil.isMatch(reg, page.getUrl().get());
     }
+    
 
     @Override
     public void handler(Page page) {
         Html html = page.getHtml();
-        List<Selectable> nodes = html.$(".category-list").nodes();
+        List<Selectable> nodes = html.$(".main-navs").nodes();
         List<Tag> list = Lists.newArrayList();
         for (Selectable node : nodes) {
-            String parent = StrUtil.space(node.xpath("//h2/text()").get());
-            list.add(Tag.builder().name(parent).note("普通").origin_id(page.getUrl().get()).build());
-            List<Selectable> childrens = node.$("a").nodes();
+            String parent = StrUtil.space(node.xpath("//div[@class='menu-main']/dl/dt/text()").get());
+            list.add(Tag.builder().name(parent).origin_id(page.getUrl().get()).note("校招").build());
+            List<Selectable> childrens = node.$(".menu-sub dl dd a").nodes();
             for (Selectable children : childrens) {
-                list.add(Tag.builder().name(children.xpath("//h3/text()").get()).url(children.links().get()).origin_id(children.$("a", "data-lg-tj-no").get()).p_name(parent).note("普通").build());
+                list.add(Tag.builder().name(children.xpath("//a/text()").get()).url(children.links().get()).origin_id(children.xpath("//a/@data-reactid").get()).p_name(parent).note("校招").build());
                 // 将搜索名继续放至队列中
                 page.addTargetRequest(children.links().get());
             }
         }
+        
         if (jobTagService.saveBatch(list)) {
             PAGE_COUNT.getAndAdd(list.size());
         }
