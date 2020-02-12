@@ -47,23 +47,24 @@ public class SpiderRunner implements CommandLineRunner {
         String url1 = "https://www.lagou.com/";
         String url2 = "https://xiaoyuan.lagou.com/";
         String url3 = "https://www.lagou.com/zhaopin/Java/30";
-        String url4 = "https://www.lagou.com/jobs/6569978.html";
+        String url4 = "https://www.lagou.com/jobs/5413385.html";
 
         DateTime start = DateUtil.date();
-        Site site = Site.me().setRetryTimes(10).setTimeOut(10000).setSleepTime(800).setCycleRetryTimes(3);
+        Site site = Site.me().setRetryTimes(10).setTimeOut(10000).setSleepTime(1000).setCycleRetryTimes(3);
         Grasp.create()
                 .addListen(indexHandle)
                 .addListen(schoolHandler)
                 .addListen(tagsHandler)
                 .addListen(pageHandler)
                 .Site(site)
-//                .addUrl(url1)
+                .addUrl(url1)
 //                .addUrl(url2)
 //                .addUrl(url3)
-                .addUrl(url4)
+//                .addUrl(url4)
+                .thread(1)
                 .run();
         DateTime end = DateUtil.date();
-
+        
         log.info("/***************************/");
         log.info("抓取耗时：{}", DateUtil.formatBetween(start, end, BetweenFormater.Level.SECOND));
         log.info("/***************************/");

@@ -46,7 +46,6 @@ public class PageProcessorImpl implements PageProcessor {
         log.info("由于没有处理程序或处理程序均没有生效。");
     }
 
-
     @Override
     public void process(Page page) {
         for (AbstractChannelHandler handle : handlerList) {

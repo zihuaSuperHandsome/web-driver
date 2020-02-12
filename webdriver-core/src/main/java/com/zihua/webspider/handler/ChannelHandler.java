@@ -1,6 +1,7 @@
 package com.zihua.webspider.handler;
 
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Site;
 
 public interface ChannelHandler {
 

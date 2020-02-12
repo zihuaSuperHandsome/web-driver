@@ -32,7 +32,7 @@ public class PageHandler extends AbstractChannelHandler {
     
     @Override
     public boolean condition(Page page) {
-        String reg = "https://.*/jobs/.*";
+        String reg = "https://.*lagou.com/jobs/.*";
         return ReUtil.isMatch(reg, page.getUrl().get());
     }
     
@@ -43,17 +43,25 @@ public class PageHandler extends AbstractChannelHandler {
         // 获取唯一标识
         String origin_id = html.$("#jobid", "value").get();
         
-        // 获取职位标记(需要花费大量本地时间)
+        // 获取公司唯一标识
+        String company_id = html.$("#companyid", "value").get();
+        
+        // 获取职位标记(可能需要花费大量本地时间)
         String mark_api_url = String.format("https://gate.lagou.com/v1/zhaopin/positions/%s/topCardDetails", origin_id);
         String request = HttpRequest.get(mark_api_url).header("X-L-REQ-HEADER", "{deviceType: 10}").timeout(20000).execute().body();
         JSONObject json = new JSONObject(request);
-        String mark = json.get("content", JSONObject.class, true).get("showText").toString();
+        String mark;
+        try {
+            mark = json.get("content", JSONObject.class, true).getStrEscaped("showText", null);
+        } catch (NullPointerException e) {
+            mark = null;
+        }
         
         // 获取地址
         StringBuilder address = new StringBuilder("");
         address.append(String.join("-", html.$(".job-address .work_addr").xpath("//a/text()").all()));
         address.append("-").append(StrUtil.space(html.$(".job-address .work_addr").xpath("//div/text()").get().replace("-", "")));
-       
+        
         // 获取工作信息列表
         List<String> job_requests = html.xpath("//dd[@class='job_request']/h3/span/text()").all();
         
@@ -69,15 +77,16 @@ public class PageHandler extends AbstractChannelHandler {
                 .address(address.toString())
                 .mark(mark)
                 .origin_id(origin_id)
+                .company_id(company_id)
                 .company_name(StrUtil.space(html.$(".job_company .job_company_content").xpath("//em[@class='fl-cn']/text()").get()))
                 .company_url(html.$(".job_company .c_feature").xpath("//a/h4/text()").get())
             .build();
-
-        System.out.println(job);
+            jobService.save(job);
     }
+    
 
     @Override
     public String nextTarget(Page page) {
-        return null;
+        return String.format("https://www.lagou.com/gongsi/%s.html", page.getHtml().$("#companyid", "value").get());
     }
 }

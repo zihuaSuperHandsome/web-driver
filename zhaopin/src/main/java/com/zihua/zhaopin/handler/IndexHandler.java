@@ -28,6 +28,8 @@ public class IndexHandler extends AbstractChannelHandler {
 
     @Override
     public void handler(Page page) {
+        page.getHeaders().forEach((k,v)->System.out.println(k + ":" + v));
+        
         Html html = page.getHtml();
         List<Selectable> nodes = html.$(".category-list").nodes();
         List<Tag> list = Lists.newArrayList();

@@ -60,6 +60,9 @@ public class Job {
     @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "职位唯一标识")
     private String origin_id;
 
+    @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "发布标识")
+    private String company_id;
+
     @FieldName(other = OtherEnum.NOT_PRIMARY_KEY, length = 50, comment = "发布公司名")
     private String company_name;
 
