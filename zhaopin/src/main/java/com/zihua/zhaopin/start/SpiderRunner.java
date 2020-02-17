@@ -10,6 +10,7 @@ import com.zihua.zhaopin.handler.IndexHandler;
 import com.zihua.zhaopin.handler.PageHandler;
 import com.zihua.zhaopin.handler.SchoolHandler;
 import com.zihua.zhaopin.handler.TagsHandler;
+import com.zihua.zhaopin.rule.PageRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Site;
 
 import javax.annotation.Resource;
+import java.util.concurrent.Executors;
 
 /**
  * @ClassName StartHelper
@@ -24,7 +26,7 @@ import javax.annotation.Resource;
  * @Author 刘子华
  * @Date 2020/2/8 17:31
  */
-@Component
+//@Component
 public class SpiderRunner implements CommandLineRunner {
 
     private static Logger log = LoggerFactory.getLogger(SpiderRunner.class);
@@ -50,13 +52,13 @@ public class SpiderRunner implements CommandLineRunner {
         String url4 = "https://www.lagou.com/jobs/5413385.html";
 
         DateTime start = DateUtil.date();
-        Site site = Site.me().setRetryTimes(10).setTimeOut(10000).setSleepTime(1000).setCycleRetryTimes(3);
-        Grasp.create()
+        Site site = Site.me().setRetryTimes(1).setTimeOut(10000).setSleepTime(3000).setCycleRetryTimes(1);
+        Grasp.create(site)
                 .addListen(indexHandle)
                 .addListen(schoolHandler)
                 .addListen(tagsHandler)
                 .addListen(pageHandler)
-                .Site(site)
+                .addRule(new PageRule())
                 .addUrl(url1)
 //                .addUrl(url2)
 //                .addUrl(url3)

@@ -12,6 +12,7 @@ import com.zihua.zhaopin.entity.Job;
 import com.zihua.zhaopin.service.IJobService;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.selector.Html;
 
 import javax.annotation.Resource;
@@ -32,14 +33,17 @@ public class PageHandler extends AbstractChannelHandler {
     
     @Override
     public boolean condition(Page page) {
-        String reg = "https://.*lagou.com/jobs/.*";
-        return ReUtil.isMatch(reg, page.getUrl().get());
+//        String reg = "https://.*lagou.com/jobs/.*";
+//        return ReUtil.isMatch(reg, page.getUrl().get());
+        return false;
     }
     
     @Override
     public void handler(Page page) {
         Html html = page.getHtml();
         
+        try {
+            
         // 获取唯一标识
         String origin_id = html.$("#jobid", "value").get();
         
@@ -82,8 +86,13 @@ public class PageHandler extends AbstractChannelHandler {
                 .company_url(html.$(".job_company .c_feature").xpath("//a/h4/text()").get())
             .build();
             jobService.save(job);
+
+        } catch (Exception e) {
+            System.out.println(page.getUrl());
+            System.out.println(html);
+//            page.addTargetRequest(page.getUrl().get());
+        }
     }
-    
 
     @Override
     public String nextTarget(Page page) {
