@@ -3,6 +3,7 @@ package com.zihua.webspider.handler;
 import cn.hutool.core.collection.ConcurrentHashSet;
 import lombok.Getter;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Site;
 
 import java.util.Map;
 import java.util.Set;

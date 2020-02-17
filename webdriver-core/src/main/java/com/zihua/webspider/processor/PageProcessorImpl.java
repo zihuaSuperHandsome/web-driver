@@ -28,14 +28,15 @@ public class PageProcessorImpl implements PageProcessor {
     private AtomicInteger  handleCount = new AtomicInteger(0);
     public Cache<Class<?>, Object> CACHE = CacheUtil.newFIFOCache(2<<10);
 
-    public PageProcessorImpl(Site site) {
-        this.site = site;
-    }
     public PageProcessorImpl() {
         this.site = Site.me().setRetryTimes(3).setSleepTime(100);
     }
     public PageProcessorImpl(List<AbstractChannelHandler> handlerList) {
         this.handlerList = handlerList;
+    }
+
+    public PageProcessorImpl(Site site) {
+        this.site = site;
     }
 
     public void addHandle(AbstractChannelHandler handle) {

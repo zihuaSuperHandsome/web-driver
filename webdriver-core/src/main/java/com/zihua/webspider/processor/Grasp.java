@@ -1,42 +1,49 @@
 package com.zihua.webspider.processor;
 
+import com.zihua.webspider.downloader.CustomDownloader;
 import com.zihua.webspider.handler.AbstractChannelHandler;
+import com.zihua.webspider.regulation.DownloaderRule;
+import org.assertj.core.util.Lists;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 
+import java.util.List;
 import java.util.Set;
 
 public class Grasp {
     private PageProcessorImpl pageProcessor;
     private Site site = Site.me().setRetryTimes(10).setTimeOut(10000).setSleepTime(300).setCycleRetryTimes(3);
-    private Spider spider;
+    private SpiderEx spider;
 
-    public Grasp(AbstractChannelHandler handler) {
+    public Grasp(Site site) {
+        this.site = site;
         Grasp();
-        this.pageProcessor.addHandle(handler);
     }
     public Grasp() {
         Grasp();
     }
     private void Grasp() {
         pageProcessor = new PageProcessorImpl(site);
-        spider = new Spider(pageProcessor);
+        spider = new SpiderEx(pageProcessor);
     }
 
-    public static Grasp create(AbstractChannelHandler handler) {
-        return new Grasp().addListen(handler);
-    }
-    public static Grasp create() {
-        return new Grasp();
+    public static Grasp create(Site site) {
+        return new Grasp(site);
     }
 
     public Grasp addListen(AbstractChannelHandler handler) {
         pageProcessor.addHandle(handler);
         return this;
     }
+
+    public Grasp addRule(DownloaderRule rule) {
+        spider.addRule(rule);
+        return this;
+    }
     
     public void run() {
-        spider.run();
+        
+        spider.setDownloader(new CustomDownloader()).run();
     }
 
     public Grasp thread(int count) {
@@ -46,11 +53,6 @@ public class Grasp {
 
     public Grasp addUrl(String... urls) {
         this.spider.addUrl(urls);
-        return this;
-    }
-
-    public Grasp Site(Site siteconfig) {
-        site = siteconfig;
         return this;
     }
     

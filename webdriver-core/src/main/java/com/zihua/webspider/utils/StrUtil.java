@@ -39,6 +39,9 @@ public class StrUtil {
     
     // 将连续空格替换成单个空格
     public static String space(String content) {
+        if (content == null) {
+            return "";
+        }
         return CharMatcher.whitespace().trimAndCollapseFrom(content, ' ');
     }
 
