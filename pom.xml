@@ -17,7 +17,7 @@
     <modules>
         <module>webdriver-core</module>
         <module>yidu</module>
-        <module>zhihu</module>
         <module>zhaopin</module>
+        <module>webdriver-mock</module>
     </modules>
 </project>

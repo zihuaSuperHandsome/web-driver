@@ -1,17 +1,11 @@
 package com.zihua.zhaopin.rule;
 
 import cn.hutool.core.util.ReUtil;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import com.zihua.webspider.regulation.DownloaderRule;
+import com.zihua.webdriver.regulation.DownloaderRule;
 import org.assertj.core.util.Maps;
 import us.codecraft.webmagic.Request;
 
-import java.net.HttpCookie;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName PageRule

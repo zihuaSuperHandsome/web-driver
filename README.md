@@ -39,6 +39,7 @@ lombok
 4. 在表生成工具中，关于java字段类型和数据库类型的转换，希望可以更加灵活。 
 5. 实现登陆抓取
 6. 代码生成工具(自动生成Mapper、IService、ServiceImpl、Handler)
+7. 站点探测功能，可以大概探测出某个站点有多少个页面(https://alexa.chinaz.com)
 ```
 
 ## 2020年2月8日19:03:39

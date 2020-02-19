@@ -1,16 +1,14 @@
 package com.zihua.zhaopin.processor;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
-import com.zihua.webspider.utils.StrUtil;
+import com.zihua.webdriver.utils.StrUtil;
 import com.zihua.zhaopin.entity.Job;
 import com.zihua.zhaopin.service.IJobService;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -18,7 +16,6 @@ import us.codecraft.webmagic.selector.Html;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

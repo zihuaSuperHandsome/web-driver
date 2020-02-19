@@ -1,23 +1,18 @@
 package com.zihua.zhaopin.handler;
 
-import cn.hutool.core.date.BetweenFormater;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
-import com.zihua.webspider.handler.AbstractChannelHandler;
-import com.zihua.webspider.utils.StrUtil;
+import com.zihua.webdriver.handler.AbstractChannelHandler;
+import com.zihua.webdriver.utils.StrUtil;
 import com.zihua.zhaopin.entity.Job;
 import com.zihua.zhaopin.service.IJobService;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.selector.Html;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @ClassName PageHandle

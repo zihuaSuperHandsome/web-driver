@@ -2,7 +2,7 @@ package com.zihua.zhaopin.handler;
 
 import cn.hutool.core.io.file.FileWriter;
 import cn.hutool.core.util.ReUtil;
-import com.zihua.webspider.handler.AbstractChannelHandler;
+import com.zihua.webdriver.handler.AbstractChannelHandler;
 import com.zihua.zhaopin.processor.PageThread;
 import com.zihua.zhaopin.utils.PageCache;
 import com.zihua.zhaopin.utils.FixedThreadPool;

@@ -1,8 +1,8 @@
 package com.zihua.zhaopin.handler;
 
 import cn.hutool.core.util.ReUtil;
-import com.zihua.webspider.handler.AbstractChannelHandler;
-import com.zihua.webspider.utils.StrUtil;
+import com.zihua.webdriver.handler.AbstractChannelHandler;
+import com.zihua.webdriver.utils.StrUtil;
 import com.zihua.zhaopin.entity.Tag;
 import com.zihua.zhaopin.service.ITagService;
 import org.assertj.core.util.Lists;
