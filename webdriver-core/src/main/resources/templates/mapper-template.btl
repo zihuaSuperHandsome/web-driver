@@ -1,0 +1,9 @@
+package <%print(mapperPath);%>;
+
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import <%print(packageName + "." + beanName);%>;
+
+public interface <%print(beanName);%>Mapper extends BaseMapper<<%printf(beanName);%>> {
+
+}

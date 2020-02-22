@@ -1,0 +1,7 @@
+package <%print(servicePath);%>;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import <%print(packageName + "." + beanName);%>;
+
+public interface I<%print(beanName);%>Service extends IService<<%print(beanName);%>> {
+}

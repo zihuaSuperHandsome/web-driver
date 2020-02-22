@@ -1,0 +1,13 @@
+package <%print(serviceImplPath);%>;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+import <%print(packageName + "." + beanName);%>;
+import <%print(mapperPath + "." + beanName + "Mapper");%>;
+import <%print(servicePath + ".I" + beanName + "Service");%>;
+
+
+@Service
+public class <%print(beanName);%>ServiceImpl extends ServiceImpl<<%print(beanName);%>Mapper, <%print(beanName);%>> implements I<%print(beanName);%>Service {
+}
